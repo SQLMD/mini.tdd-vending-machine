@@ -48,8 +48,7 @@ describe("vending machine", () => {
   it("should return the correct change", () => {
     machine.insertCoin(500);
     machine.pressButton("A");
-    machine.pressButton(1);
-    const change = machine.returnChange();
+    const change = machine.pressButton(1);
     expect(change).to.be.equal(500 - machine.inventory[0][0].price);
   });
 });

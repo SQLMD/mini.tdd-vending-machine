@@ -17,6 +17,7 @@ class VendingMachine {
     const plumbus = { name: `plumbus`, price: 350, count: 5 };
     const coffee = { name: "Tully's", price: 250, count: 7 };
     this.inventory = [[plumbus, coffee]];
+    this.change = 0;
   }
 
   insertCoin(coin) {
@@ -42,18 +43,16 @@ class VendingMachine {
       ];
       product.count--;
       console.log("Here is your " + product.name);
-      this.returnChange(product.price);
+      this.balance -= product.price;
+      return this.returnChange();
     }
   }
 
   returnChange() {
-    this.till = {
-      10: 0,
-      50: 0,
-      100: 0,
-      500: 0,
-    };
-    //return change;
+    const change = this.balance;
+    console.log(this.change);
+    this.balance = 0;
+    return change;
   }
 }
 module.exports = VendingMachine;
