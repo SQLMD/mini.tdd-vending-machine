@@ -13,6 +13,7 @@ class VendingMachine {
       500: 0,
     };
     this.balance = 0;
+    this.choice = { row: undefined, column: undefined };
   }
 
   insertCoin(coin) {
@@ -20,6 +21,10 @@ class VendingMachine {
       this.till[coin] += 1;
       this.balance += coin;
     }
+  }
+
+  pressButton(key) {
+    this.choice["row"] = key;
   }
 }
 module.exports = VendingMachine;

@@ -2,9 +2,13 @@ const VendingMachine = require("../VendingMachine");
 const { expect } = require("chai");
 
 describe("vending machine", () => {
+  let machine;
+
+  beforeEach(() => {
+    machine = new VendingMachine();
+  });
   it("should accept valid coins", () => {
     // Setup
-    const machine = new VendingMachine();
 
     // Exercise
     machine.insertCoin(500);
@@ -17,5 +21,15 @@ describe("vending machine", () => {
       500: 1,
     });
     expect(machine.balance).to.equal(500); // Use an ES6 getter
+  });
+
+  it("should save which button is pushed", () => {
+    machine.pressButton("A");
+    expect(machine.choice.row).to.equal("A");
+  });
+
+  it("should only allow 'A'-'D' for the row", () => {
+    machine.pressButton("E");
+    expect(machine.choice.row).to.equal(undefined);
   });
 });
