@@ -41,9 +41,14 @@ class VendingMachine {
       const product = this.inventory[dataRow[this.choice.row]][
         dataColumn[this.choice.column]
       ];
-      product.count--;
-      console.log("Here is your " + product.name);
-      this.balance -= product.price;
+      if (product.count > 0) {
+        product.count--;
+        console.log("Here is your " + product.name);
+        this.balance -= product.price;
+      }
+
+      this.choice.row = undefined;
+      this.choice.column = undefined;
       return this.returnChange();
     }
   }

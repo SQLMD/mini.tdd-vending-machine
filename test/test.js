@@ -52,6 +52,14 @@ describe("vending machine", () => {
     expect(change).to.be.equal(500 - machine.inventory[0][0].price);
   });
 
+  it("should reject purchase if not enough balance", () => {
+    const count = machine.inventory[0][0].count;
+    machine.insertCoin(100);
+    machine.pressButton("A");
+    machine.pressButton(1);
+    expect(machine.inventory[0][0].count).to.equal(count);
+  });
+
   it("should not allow count of product to go negative", () => {
     const count = machine.inventory[0][0].count;
     for (let i = 0; i <= count; i++) {
