@@ -38,4 +38,10 @@ describe("vending machine", () => {
     machine.pressButton(1);
     expect(machine.choice.column).to.equal(1);
   });
+  it("should decrease inventory by choice", () => {
+    const count = machine.inventory[0][0].count;
+    machine.pressButton("A");
+    machine.pressButton(1);
+    expect(machine.inventory[0][0].count).to.be.equal(count - 1);
+  });
 });

@@ -14,6 +14,9 @@ class VendingMachine {
     };
     this.balance = 0;
     this.choice = { row: undefined, column: undefined };
+    const plumbus = { name: `plumbus`, price: 350, count: 5 };
+    const coffee = { name: "Tully's", price: 250, count: 7 };
+    this.inventory = [[plumbus, coffee]];
   }
 
   insertCoin(coin) {
@@ -26,6 +29,16 @@ class VendingMachine {
   pressButton(key) {
     if (["A", "B", "C", "D"].includes(key)) {
       this.choice["row"] = key;
+      console.log(key);
+    } else if ([1, 2, 3, 4].includes(key)) {
+      this.choice["column"] = key;
+      console.log(this.choice.row, this.choice.column);
+    }
+    if (this.choice.row != undefined && this.choice.column != undefined) {
+      const dataRow = { A: 0, B: 1, C: 2, D: 3 };
+      const dataColumn = { 1: 0, 2: 1, 3: 2, 4: 3 };
+      this.inventory[dataRow[this.choice.row]][dataColumn[this.choice.column]]
+        .count--;
     }
   }
 }
