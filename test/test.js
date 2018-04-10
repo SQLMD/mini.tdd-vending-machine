@@ -82,8 +82,8 @@ describe("vending machine", () => {
     machine.pressButton(1);
     expect(machine.till).to.deep.equal({
       10: 0,
-      50: 1,
-      100: 0,
+      50: 5,
+      100: 1,
       500: 0,
     });
   });

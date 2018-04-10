@@ -60,8 +60,35 @@ class VendingMachine {
 
   returnChange() {
     const change = this.balance;
-    console.log(this.change);
     this.balance = 0;
+    const coins = {
+      10: 0,
+      50: 0,
+      100: 0,
+      500: 0,
+    };
+    let tempChange = change;
+    while (tempChange >= 500) {
+      coins["500"] += 1;
+      tempChange -= 500;
+      this.till["500"] -= 1;
+    }
+    while (tempChange >= 100) {
+      coins["100"] += 1;
+      tempChange -= 100;
+      this.till["100"] -= 1;
+    }
+    while (tempChange >= 50) {
+      coins["50"] += 1;
+      tempChange -= 50;
+      this.till["50"] -= 1;
+    }
+    while (tempChange > 0) {
+      coins["10"] += 1;
+      tempChange -= 10;
+      this.till["10"] -= 1;
+    }
+    console.log(coins);
     return change;
   }
 }
