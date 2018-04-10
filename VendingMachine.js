@@ -40,7 +40,6 @@ class VendingMachine {
       [tea1, tea2, tea3, tea4],
       [sports1, sports2, sports3, sports4],
     ];
-    this.change = 0;
   }
 
   insertCoin(coin) {
@@ -153,7 +152,5 @@ class VendingMachine {
 
     return change === 0;
   }
-
-  //updateTill(till) {}
 }
 module.exports = VendingMachine;
