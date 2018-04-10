@@ -46,12 +46,16 @@ class VendingMachine {
       this.choice.column = undefined;
 
       if (product.price > this.balance) {
-        return;
+        console.error("Insufficient funds");
+        return this.returnChange();
       }
-      if (product.count > 0) {
+      console.log(this.checkPayable(product.price));
+      if (product.count > 0 && this.checkPayable(product.price)) {
         product.count--;
         console.log("Here is your " + product.name);
         this.balance -= product.price;
+      } else {
+        console.log("I am sorry we are out of " + product.name + " today.");
       }
 
       return this.returnChange();
@@ -59,37 +63,72 @@ class VendingMachine {
   }
 
   returnChange() {
-    const change = this.balance;
-    this.balance = 0;
+    let change = this.balance;
+
     const coins = {
       10: 0,
       50: 0,
       100: 0,
       500: 0,
     };
-    let tempChange = change;
-    while (tempChange >= 500) {
+    while (change >= 500 && this.till["500"] > 0) {
       coins["500"] += 1;
-      tempChange -= 500;
+      change -= 500;
       this.till["500"] -= 1;
     }
-    while (tempChange >= 100) {
+    while (change >= 100 && this.till["100"] > 0) {
       coins["100"] += 1;
-      tempChange -= 100;
+      change -= 100;
       this.till["100"] -= 1;
     }
-    while (tempChange >= 50) {
+    while (change >= 50 && this.till["50"] > 0) {
       coins["50"] += 1;
-      tempChange -= 50;
+      change -= 50;
       this.till["50"] -= 1;
     }
-    while (tempChange > 0) {
+    while (change > 0 && this.till["10"] > 0) {
       coins["10"] += 1;
-      tempChange -= 10;
+      change -= 10;
       this.till["10"] -= 1;
     }
+
     console.log(coins);
-    return change;
+    this.balance = 0;
+    return coins;
+  }
+
+  checkPayable(price) {
+    let change = this.balance - price;
+    const copyOfTill = Object.assign({}, this.till);
+
+    const coins = {
+      10: 0,
+      50: 0,
+      100: 0,
+      500: 0,
+    };
+    while (change >= 500 && copyOfTill["500"] > 0) {
+      coins["500"] += 1;
+      change -= 500;
+      copyOfTill["500"] -= 1;
+    }
+    while (change >= 100 && copyOfTill["100"] > 0) {
+      coins["100"] += 1;
+      change -= 100;
+      copyOfTill["100"] -= 1;
+    }
+    while (change >= 50 && copyOfTill["50"] > 0) {
+      coins["50"] += 1;
+      change -= 50;
+      copyOfTill["50"] -= 1;
+    }
+    while (change > 0 && copyOfTill["10"] > 0) {
+      coins["10"] += 1;
+      change -= 10;
+      copyOfTill["10"] -= 1;
+    }
+
+    return change === 0;
   }
 }
 module.exports = VendingMachine;
