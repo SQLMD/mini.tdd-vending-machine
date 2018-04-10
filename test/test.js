@@ -38,8 +38,10 @@ describe("vending machine", () => {
     machine.pressButton(1);
     expect(machine.choice.column).to.equal(1);
   });
+
   it("should decrease inventory by choice", () => {
     const count = machine.inventory[0][0].count;
+    machine.insertCoin(500);
     machine.pressButton("A");
     machine.pressButton(1);
     expect(machine.inventory[0][0].count).to.be.equal(count - 1);
@@ -63,9 +65,14 @@ describe("vending machine", () => {
   it("should not allow count of product to go negative", () => {
     const count = machine.inventory[0][0].count;
     for (let i = 0; i <= count; i++) {
+      machine.insertCoin(500);
       machine.pressButton("A");
       machine.pressButton(1);
     }
     expect(machine.inventory[0][0].count).to.equal(0);
+  });
+
+  it("should have zero balance at first", () => {
+    expect(machine.balance).to.equal(0);
   });
 });

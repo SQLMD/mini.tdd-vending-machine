@@ -35,20 +35,25 @@ class VendingMachine {
       this.choice["column"] = key;
       console.log(this.choice.row, this.choice.column);
     }
+
     if (this.choice.row != undefined && this.choice.column != undefined) {
       const dataRow = { A: 0, B: 1, C: 2, D: 3 };
       const dataColumn = { 1: 0, 2: 1, 3: 2, 4: 3 };
       const product = this.inventory[dataRow[this.choice.row]][
         dataColumn[this.choice.column]
       ];
+      this.choice.row = undefined;
+      this.choice.column = undefined;
+
+      if (product.price > this.balance) {
+        return;
+      }
       if (product.count > 0) {
         product.count--;
         console.log("Here is your " + product.name);
         this.balance -= product.price;
       }
 
-      this.choice.row = undefined;
-      this.choice.column = undefined;
       return this.returnChange();
     }
   }
