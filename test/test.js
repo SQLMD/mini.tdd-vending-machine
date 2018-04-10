@@ -75,4 +75,16 @@ describe("vending machine", () => {
   it("should have zero balance at first", () => {
     expect(machine.balance).to.equal(0);
   });
+
+  it("should decrease the till", () => {
+    [100, 50, 50, 50, 50, 50, 50].forEach((coin) => machine.insertCoin(coin));
+    machine.pressButton("A");
+    machine.pressButton(1);
+    expect(machine.till).to.deep.equal({
+      10: 0,
+      50: 1,
+      100: 0,
+      500: 0,
+    });
+  });
 });
