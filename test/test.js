@@ -44,4 +44,12 @@ describe("vending machine", () => {
     machine.pressButton(1);
     expect(machine.inventory[0][0].count).to.be.equal(count - 1);
   });
+
+  it("should return the correct change", () => {
+    machine.insertCoin(500);
+    machine.pressButton("A");
+    machine.pressButton(1);
+    const change = machine.returnChange();
+    expect(change).to.be.equal(500 - machine.inventory[0][0].price);
+  });
 });
