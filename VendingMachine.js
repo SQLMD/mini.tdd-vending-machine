@@ -14,9 +14,32 @@ class VendingMachine {
     };
     this.balance = 0;
     this.choice = { row: undefined, column: undefined };
-    const plumbus = { name: `plumbus`, price: 350, count: 5 };
-    const coffee = { name: "Tully's", price: 250, count: 7 };
-    this.inventory = [[plumbus, coffee]];
+    const soda1 = { name: `1 liter coke`, price: 350, count: 5 };
+    const soda2 = { name: "coke zero", price: 160, count: 7 };
+    const soda3 = { name: "Dr. Pepper", price: 170, count: 4 };
+    const soda4 = { name: "Fanta Melon", price: 150, count: 1 };
+
+    const coffee1 = { name: "boss", price: 130, count: 7 };
+    const coffee2 = { name: "starbucks", price: 200, count: 7 };
+    const coffee3 = { name: "tullys", price: 360, count: 7 };
+    const coffee4 = { name: "wonda", price: 100, count: 7 };
+
+    const tea1 = { name: "jasmin", price: 160, count: 7 };
+    const tea2 = { name: "matcha", price: 160, count: 7 };
+    const tea3 = { name: "sokenbicha", price: 160, count: 7 };
+    const tea4 = { name: "black", price: 160, count: 7 };
+
+    const sports1 = { name: "Aquarius", price: 160, count: 7 };
+    const sports2 = { name: "Pokari Sweat", price: 160, count: 7 };
+    const sports3 = { name: "Kirin Sports", price: 160, count: 7 };
+    const sports4 = { name: "water", price: 160, count: 7 };
+
+    this.inventory = [
+      [soda1, soda2, soda3, soda4],
+      [coffee1, coffee2, coffee3, coffee4],
+      [tea1, tea2, tea3, tea4],
+      [sports1, sports2, sports3, sports4],
+    ];
     this.change = 0;
   }
 
@@ -130,5 +153,7 @@ class VendingMachine {
 
     return change === 0;
   }
+
+  //updateTill(till) {}
 }
 module.exports = VendingMachine;
