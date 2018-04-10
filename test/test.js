@@ -1,5 +1,6 @@
 const VendingMachine = require("../VendingMachine");
 const { expect } = require("chai");
+//const sinonTest = require("mocha-sinon");
 
 describe("vending machine", () => {
   let machine;
@@ -31,5 +32,10 @@ describe("vending machine", () => {
   it("should only allow 'A'-'D' for the row", () => {
     machine.pressButton("E");
     expect(machine.choice.row).to.equal(undefined);
+  });
+
+  it("should save which column of button is pushed", () => {
+    machine.pressButton(1);
+    expect(machine.choice.column).to.equal(1);
   });
 });

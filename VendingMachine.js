@@ -24,7 +24,9 @@ class VendingMachine {
   }
 
   pressButton(key) {
-    this.choice["row"] = key;
+    if (["A", "B", "C", "D"].includes(key)) {
+      this.choice["row"] = key;
+    }
   }
 }
 module.exports = VendingMachine;
